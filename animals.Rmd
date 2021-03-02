@@ -1,19 +1,21 @@
 ---
-title: "Summary report for the `r params$pick_species`"
+title: "Summary Report for the `r params$pick_species`"
 output: html_document
 params:
   pick_species: bear
-  
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include = TRUE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+
 library(tidyverse)
 
 animals <- read_csv("animals.csv")
 ```
 
-```{r, echo = FALSE}
+```{r}
 animal_subset <- animals %>% 
   filter(species == params$pick_species)
 ```
@@ -26,7 +28,10 @@ Basic information about this cute `r params$pick_species`:
 
 ```{r, eval = FALSE}
 # Try it out! Run in Console:
-# rmarkdown::render(input = "animals.Rmd", params = list(pick_species = "species name"), output_file = "output_file_name.html")
+
+rmarkdown::render(input = "animals.Rmd", 
+                  params = list(pick_species = "species name"), 
+                  output_file = "output_file_name.html")
 
 # Then, try rendering with the render_animal_report() function (you need to have run the code in render_functions.R to make the function available in your working session)!
 ```
